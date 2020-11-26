@@ -8,14 +8,14 @@ import (
 	"strings"
 )
 
-type calc struct{}
+type Calc struct{}
 
-func (calc) parseInteger(operated string) (int, error) {
+func (Calc) parseInteger(operated string) (int, error) {
 	result, err := strconv.Atoi(operated)
 	return result, err
 }
 
-func (c calc) operate(input string, operator string) (int, error) {
+func (c Calc) Operate(input string, operator string) (int, error) {
 	cleanInput := strings.Split(input, operator)
 	first, err := c.parseInteger(cleanInput[0])
 	if err != nil {
@@ -40,14 +40,14 @@ func (c calc) operate(input string, operator string) (int, error) {
 	}
 }
 
-func readInput() string {
+func ReadInput() string {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	return scanner.Text()
 }
 
 func processResult(input string, operator string) {
-	c := calc{}
+	c := Calc{}
 	value, err := c.operate(input, operator)
 	if err != nil {
 		fmt.Println(err)
